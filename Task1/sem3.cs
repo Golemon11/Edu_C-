@@ -1,81 +1,132 @@
-/*Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.*/
+/*Задача 47: Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.*/
 /*
-Console.Write("Введите числа через запятую: ");
-int[] numbers = StringToNum(Console.ReadLine());
+Console.WriteLine("введите количество строк");
+int linesVol = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите количество столбцов");
+int columnsVol = Convert.ToInt32(Console.ReadLine());
+double[,] numbers = new double[linesVol, columnsVol];
+FillArrayRandomNumbers(numbers);
 PrintArray(numbers);
-int sum = 0;
-for (int i = 0; i < numbers.Length; i++)
+
+void FillArrayRandomNumbers(double[,] array)
 {
-    if (numbers[i] > 0)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        sum++;
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = Convert.ToDouble(new Random().Next(-100, 100)) / 10;
+        }
     }
 }
-Console.WriteLine();
-Console.WriteLine($"количество значений больше 0 = {sum}");
 
-
-int[] StringToNum(string input)
+void PrintArray(double[,] array)
 {
-    int count = 1;
-    for (int i = 0; i < input.Length; i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        if (input[i] == ',')
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            count++;
+            Console.Write(array[i, j] + " ");
         }
+        Console.Write("]");
+        Console.WriteLine("");
     }
-
-    int[] numbers = new int [count];
-    int index = 0;
-
-    for (int i = 0; i < input.Length; i++)
-    {
-        string temp = "";
-
-        while (input [i] != ',')
-        {
-        if(i != input.Length - 1)
-        {
-            temp += input [i].ToString();
-            i++;
-        }
-        else
-        {
-            temp += input [i].ToString();
-            break;
-        }
-        }
-        numbers[index] = Convert.ToInt32(temp);
-        index++;
-    }
-    return numbers;
-}
-
-
-void PrintArray(int[] array)
-{
-    Console.Write("[ ");
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i] + " ");
-    }
-    Console.Write("]");
 }
 */
-/*Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.*/
+/*Задача 50: Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.*/
 /*
-Console.WriteLine("введите значение b1");
-double b1 = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("введите число k1");
-double k1 = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("введите значение b2");
-double b2 = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("введите число k2");
-double k2 = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите номер строки");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите номер столбца");
+int m = Convert.ToInt32(Console.ReadLine());
+int [,] numbers = new int [10,10];
+FillArrayRandomNumbers(numbers);
 
-double x = (-b2 + b1)/(-k1 + k2);
-double y = k2 * x + b2;
+if (n > numbers.GetLength(0) || m > numbers.GetLength(1))
+{
+    Console.WriteLine("такого элемента нет");
+}
+else
+{
+    Console.WriteLine($"значение элемента {n} строки и {m} столбца равно {numbers[n-1,m-1]}");
+}
 
-Console.WriteLine($"две прямые пересекутся в точке с координатами X: {x}, Y: {y}");
+PrintArray(numbers);
+
+void FillArrayRandomNumbers(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+        {        
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                array [i,j] = new Random().Next(-100, 100)/10;
+            }   
+        }
+}
+
+void PrintArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i,j] + " ");
+        }   
+        Console.Write("]");
+        Console.WriteLine(""); 
+    }
+}
+*/
+/*Задача 52: Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.*/
+/*
+Console.WriteLine("введите количество строк");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите количество столбцов");
+int m = Convert.ToInt32(Console.ReadLine());
+
+int[,] numbers = new int[n, m];
+FillArrayRandomNumbers(numbers);
+
+
+for (int j = 0; j < numbers.GetLength(1); j++)
+{
+    double avarage = 0;
+    for (int i = 0; i < numbers.GetLength(0); i++)
+    {
+        avarage = (avarage + numbers[i, j]);
+    }
+    avarage = avarage / n;
+    Console.Write(avarage + "; ");
+}
+Console.WriteLine();
+PrintArray(numbers);
+
+
+
+void FillArrayRandomNumbers(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(0, 10);
+        }
+    }
+}
+
+void PrintArray(int[,] array)
+{
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i, j] + " ");
+        }
+        Console.Write("]");
+        Console.WriteLine("");
+    }
+}
 */
